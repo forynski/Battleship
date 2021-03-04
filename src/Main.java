@@ -10,18 +10,28 @@ public class Main {
             System.out.print(i + " ");
         }
         System.out.println();
-        char c;
-        for (c = 'A'; c <= 'H'; c++) {
-            System.out.println(c + " ");
-        }
 
+        char c;
         int rows = 10;
         int columns = 10;
-        char[][] charArray = new char[rows][columns];
 
-        for (char[] chars : charArray) {
-            Arrays.fill(chars, '~');
-            System.out.println(chars);
+        char[][] charArray = new char[rows][columns];
+        for (c = 'A'; c <= 'H'; c++) {
+            System.out.print(c + " ");
+
+            for (char[] chars : charArray) {
+                Arrays.fill(chars, '~');
+                System.out.println(chars);
+            }
         }
+
+//        int rows = 10;
+//        int columns = 10;
+//        char[][] charArray = new char[rows][columns];
+//
+//        for (char[] chars : charArray) {
+//            Arrays.fill(chars, '~');
+//            System.out.println(chars);
+//        }
     }
 }
