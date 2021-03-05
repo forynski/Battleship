@@ -1,37 +1,22 @@
 package battleship;
 
-import java.util.Arrays;
-
 public class Main {
 
     public static void main(String[] args) {
-        System.out.print("  ");
-        for (int i = 1; i <= 10; i++) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
+        String[] numbers = {" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+        String[] letters = {" ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
 
-        char c;
-        int rows = 10;
-        int columns = 10;
-
-        char[][] charArray = new char[rows][columns];
-        for (c = 'A'; c <= 'H'; c++) {
-            System.out.print(c + " ");
-
-            for (char[] chars : charArray) {
-                Arrays.fill(chars, '~');
-                System.out.println(chars);
+        for (int i = 0 ; i <= 10 ; i++){
+            for (int j = 0 ; j <= 10 ; j++){
+                if (i == 0 || j == 0) {
+                    System.out.print(i == 0 ? numbers[j] : letters[i]);
+                }
+                else System.out.print("~");
+                System.out.print(" ");
             }
+            System.out.println();
         }
 
-//        int rows = 10;
-//        int columns = 10;
-//        char[][] charArray = new char[rows][columns];
-//
-//        for (char[] chars : charArray) {
-//            Arrays.fill(chars, '~');
-//            System.out.println(chars);
-//        }
+
     }
 }
