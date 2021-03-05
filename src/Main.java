@@ -22,11 +22,21 @@ public class Main {
         System.out.println("Enter the coordinates of the Aircraft Carrier (5 cells):");
         String ship1 = scanner.nextLine();
 
+//        char[] chars = ship1.toCharArray();
+
+        String startLetter = ship1.substring(0, 1);
+        String startNumber = ship1.substring(1, 2);
+
+        System.out.println(startLetter);
+        System.out.println(startNumber);
+
+
         for (int i = 0; i < letters.length; i++) {
-            if (ship1.contains(letters[i])) {
+            if (ship1.substring(0, 1).contains(letters[i])) {
+                letters[i] = "O";
                 System.out.println("TEST");
             }
-
         }
+
     }
 }
