@@ -1,89 +1,112 @@
 package battleship;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-
-    static boolean bDef;
+    public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println(bDef);
 
+        char[][] grid = new char[10][10];
+        char[] alphabets = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
 
-        String[][] multi = new String[11][11];
-        multi[0][0] = " ";
-        multi[0][1] = "1";
-        multi[0][2] = "2";
-        multi[0][3] = "3";
-        multi[0][4] = "4";
-        multi[0][5] = "5";
-        multi[0][6] = "6";
-        multi[0][7] = "7";
-        multi[0][8] = "8";
-        multi[0][9] = "9";
-        multi[0][10] = "10";
-
-        multi[1][0] = "A";
-        multi[2][0] = "B";
-        multi[3][0] = "C";
-        multi[4][0] = "D";
-        multi[5][0] = "E";
-        multi[6][0] = "F";
-        multi[7][0] = "G";
-        multi[8][0] = "H";
-        multi[9][0] = "I";
-        multi[10][0] = "J";
-
-//        System.out.println(Arrays.deepToString(multi));
-
-
-
-        for (int i = 0; i <= 10; i++) {
-            for (int j = 0; j <= 10; j++) {
-                if (i == 0) {
-                    System.out.println(Arrays.toString(multi[j])
-                            .replace("[", "")
-                            .replace("]", "")
-                            .replace(",", ""));
-//                } else System.out.print("~");
-//                    System.out.print(" ");
-                }
-//                System.out.println();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                grid[i][j] = '~';
             }
         }
 
+        DisplayGrid(grid, alphabets);
+        CheckCoordinates(grid, alphabets, "Aircraft Carrier", 5);
+        CheckCoordinates(grid, alphabets, "Battleship", 4);
+        CheckCoordinates(grid, alphabets, "Submarine", 3);
+        CheckCoordinates(grid, alphabets, "Cruiser", 3);
+        CheckCoordinates(grid, alphabets, "Destroyer", 2);
+    }
 
-        //        for (int i = 0; i <= 10; i++) {
-//            for (int j = 0; j <= 10; j++) {
-//                if (i == 0 || j == 0) {
-//                    System.out.print(i == 0 ? numbers[j] : letters[i]);
-//                } else System.out.print("~");
-//                System.out.print(" ");
-//            }
-//            System.out.println();
-//        }
+    public static void CheckCoordinates(char[][] grid, char[] alphabets, String shipName, int ship) {
+        String[] coordinates;
+        System.out.println("Enter the coordinates of the " + shipName + " (" + ship + " cells):");
+        int first, second;
+        while (true) {
+            coordinates = scanner.nextLine().split("\\s+");
 
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Enter the coordinates of the Aircraft Carrier (5 cells):");
-//        String ship1 = scanner.nextLine();
+            try {
+                first = Integer.parseInt(coordinates[0].substring(1, 3));
+            } catch (StringIndexOutOfBoundsException stringIndexOutOfBoundsException) {
+                first = Integer.parseInt(String.valueOf(coordinates[0].charAt(1)));
+            }
+            try {
+                second = Integer.parseInt(coordinates[1].substring(1, 3));
+            } catch (StringIndexOutOfBoundsException stringIndexOutOfBoundsException) {
+                second = Integer.parseInt(String.valueOf(coordinates[1].charAt(1)));
+            }
 
-//        char[] chars = ship1.toCharArray();
+            if ((coordinates[0].charAt(0) >= 'A' && coordinates[1].charAt(0) <= 'J')) {
+                if (coordinates[0].charAt(0) == coordinates[1].charAt(0)) {
+                    if (Math.abs(first - second) == ship - 1) {
+                        int index = new String(alphabets).indexOf(coordinates[0].charAt(0));
+                        if (first < second) {
+                            for (int i = first - 1; i < second; i++) {
+                                grid[index][i] = 'O';
+                            }
+                        } else {
+                            for (int i = second - 1; i < first; i++) {
+                                grid[index][i] = 'O';
+                            }
+                        }
+                        DisplayGrid(grid, alphabets);
+                        break;
+                    } else {
+                        System.out.println("Error! Wrong length of the " + shipName + "! Try again:");
+                    }
+                } else {
+                    int index1 = new String(alphabets).indexOf(coordinates[0].charAt(0));
+                    int index2 = new String(alphabets).indexOf(coordinates[1].charAt(0));
 
-//        String startLetter = ship1.substring(0, 1);
-//        String startNumber = ship1.substring(1, 2);
-//
-//        System.out.println(startLetter);
-//        System.out.println(startNumber);
-//
-//
-//        for (int i = 0; i < letters.length; i++) {
-//            if (ship1.substring(0, 1).contains(letters[i])) {
-//                letters[i] = "O";
-//                System.out.println("TEST");
-//            }
-//        }
+                    if (first > 1 && second > 1 && index1 > 1 && index2 > 1 && index1 < 9 && index2 < 9) {
+                        if (grid[index1 - 1][first] != 'O' && grid[index1 + 1][first] != 'O' && grid[index2 - 1][first] != 'O' && grid[index2 + 1][first] != 'O') {
+                            if (index1 < index2 && first == second) {
+                                for (int i = index1; i <= index2; i++) {
+                                    grid[i][first - 1] = 'O';
+                                }
+                                DisplayGrid(grid, alphabets);
+                                break;
+                            } else {
+                                System.out.println("Error! Wrong ship location! Try again:");
+                            }
+                        } else {
+                            System.out.println("Error! You placed it too close to another one. Try again:");
+                        }
+                    } else {
+                        if (index1 < index2 && first == second) {
+                            for (int i = index1; i <= index2; i++) {
+                                grid[i][first - 1] = 'O';
+                            }
+                            DisplayGrid(grid, alphabets);
+                            break;
+                        } else {
+                            System.out.println("Error! Wrong ship location! Try again:");
+                        }
+                    }
+                }
+            }
+        }
+    }
 
+    public static void DisplayGrid(char[][] grid, char[] alphabets) {
+        System.out.print("  ");
+        for (int i = 1; i <= 10; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        for (int i = 0; i < 10; i++) {
+            System.out.print(alphabets[i] + " ");
+            for (int j = 0; j < 10; j++) {
+                System.out.print(grid[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
 
