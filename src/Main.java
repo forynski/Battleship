@@ -5,13 +5,11 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
-//        String[] numbers = {" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-//        String[] letters = {" ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+    static boolean bDef;
 
-        //TODO: use 2-dims array
-//        String[][] multi = {{" ", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"},
-//                {" ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"}};
+    public static void main(String[] args) {
+        System.out.println(bDef);
+
 
         String[][] multi = new String[11][11];
         multi[0][0] = " ";
@@ -40,17 +38,18 @@ public class Main {
 //        System.out.println(Arrays.deepToString(multi));
 
 
+
         for (int i = 0; i <= 10; i++) {
             for (int j = 0; j <= 10; j++) {
                 if (i == 0) {
-                    System.out.print(Arrays.toString(multi[j])
-                            .replace("[","")
-                            .replace("]","")
-                            .replace(",",""));
+                    System.out.println(Arrays.toString(multi[j])
+                            .replace("[", "")
+                            .replace("]", "")
+                            .replace(",", ""));
 //                } else System.out.print("~");
 //                    System.out.print(" ");
                 }
-                System.out.println();
+//                System.out.println();
             }
         }
 
