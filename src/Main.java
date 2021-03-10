@@ -22,36 +22,45 @@ public class Main {
         CheckCoordinates(grid, alphabets, "Submarine", 3);
         CheckCoordinates(grid, alphabets, "Cruiser", 3);
         CheckCoordinates(grid, alphabets, "Destroyer", 2);
+
+        System.out.println("The game starts!");
+        DisplayGrid(grid, alphabets);
+        System.out.println("Take a shot!");
+        scanner = new Scanner(System.in);
+        // TODO: shooting grid
     }
 
     public static void CheckCoordinates(char[][] grid, char[] alphabets, String shipName, int ship) {
         String[] coordinates;
         System.out.println("Enter the coordinates of the " + shipName + " (" + ship + " cells):");
-        int first, second;
+
+        int startCoordinates;
+        int endCoordinates;
+
         while (true) {
             coordinates = scanner.nextLine().split("\\s+");
 
             try {
-                first = Integer.parseInt(coordinates[0].substring(1, 3));
+                startCoordinates = Integer.parseInt(coordinates[0].substring(1, 3));
             } catch (StringIndexOutOfBoundsException stringIndexOutOfBoundsException) {
-                first = Integer.parseInt(String.valueOf(coordinates[0].charAt(1)));
+                startCoordinates = Integer.parseInt(String.valueOf(coordinates[0].charAt(1)));
             }
             try {
-                second = Integer.parseInt(coordinates[1].substring(1, 3));
+                endCoordinates = Integer.parseInt(coordinates[1].substring(1, 3));
             } catch (StringIndexOutOfBoundsException stringIndexOutOfBoundsException) {
-                second = Integer.parseInt(String.valueOf(coordinates[1].charAt(1)));
+                endCoordinates = Integer.parseInt(String.valueOf(coordinates[1].charAt(1)));
             }
 
             if ((coordinates[0].charAt(0) >= 'A' && coordinates[1].charAt(0) <= 'J')) {
                 if (coordinates[0].charAt(0) == coordinates[1].charAt(0)) {
-                    if (Math.abs(first - second) == ship - 1) {
+                    if (Math.abs(startCoordinates - endCoordinates) == ship - 1) {
                         int index = new String(alphabets).indexOf(coordinates[0].charAt(0));
-                        if (first < second) {
-                            for (int i = first - 1; i < second; i++) {
+                        if (startCoordinates < endCoordinates) {
+                            for (int i = startCoordinates - 1; i < endCoordinates; i++) {
                                 grid[index][i] = 'O';
                             }
                         } else {
-                            for (int i = second - 1; i < first; i++) {
+                            for (int i = endCoordinates - 1; i < startCoordinates; i++) {
                                 grid[index][i] = 'O';
                             }
                         }
@@ -64,11 +73,11 @@ public class Main {
                     int index1 = new String(alphabets).indexOf(coordinates[0].charAt(0));
                     int index2 = new String(alphabets).indexOf(coordinates[1].charAt(0));
 
-                    if (first > 1 && second > 1 && index1 > 1 && index2 > 1 && index1 < 9 && index2 < 9) {
-                        if (grid[index1 - 1][first] != 'O' && grid[index1 + 1][first] != 'O' && grid[index2 - 1][first] != 'O' && grid[index2 + 1][first] != 'O') {
-                            if (index1 < index2 && first == second) {
+                    if (startCoordinates > 1 && endCoordinates > 1 && index1 > 1 && index2 > 1 && index1 < 9 && index2 < 9) {
+                        if (grid[index1 - 1][startCoordinates] != 'O' && grid[index1 + 1][startCoordinates] != 'O' && grid[index2 - 1][startCoordinates] != 'O' && grid[index2 + 1][startCoordinates] != 'O') {
+                            if (index1 < index2 && startCoordinates == endCoordinates) {
                                 for (int i = index1; i <= index2; i++) {
-                                    grid[i][first - 1] = 'O';
+                                    grid[i][startCoordinates - 1] = 'O';
                                 }
                                 DisplayGrid(grid, alphabets);
                                 break;
@@ -79,9 +88,9 @@ public class Main {
                             System.out.println("Error! You placed it too close to another one. Try again:");
                         }
                     } else {
-                        if (index1 < index2 && first == second) {
+                        if (index1 < index2 && startCoordinates == endCoordinates) {
                             for (int i = index1; i <= index2; i++) {
-                                grid[i][first - 1] = 'O';
+                                grid[i][startCoordinates - 1] = 'O';
                             }
                             DisplayGrid(grid, alphabets);
                             break;
