@@ -29,7 +29,7 @@ public class Main {
 
         System.out.println("Take a shot!");
         String shot = scanner.nextLine();
-        
+
         // TODO: add a loop
 
         char x = shot.charAt(0);
@@ -87,28 +87,6 @@ public class Main {
         } else {
             System.out.println("You missed!");
         }
-
-
-//        char[][] shotCoordinates = new char[x][y];
-//
-//        for (char c : alphabets) {
-//            if (x == c) {
-//                if (x == 'A') {
-//                    System.out.println(grid[0][0]);
-//                }
-//            }
-//        }
-//
-//        for (char ch : alphabets) {
-//            if (ch == x) {
-//                System.out.println(grid[0]);
-//                System.out.println(ch);
-//                DisplayGrid(grid, alphabets);
-//            }
-//        }
-
-
-        // TODO: shooting grid
     }
 
 
