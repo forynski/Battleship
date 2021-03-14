@@ -25,9 +25,33 @@ public class Main {
 
         System.out.println("The game starts!");
         DisplayGrid(grid, alphabets);
+
         System.out.println("Take a shot!");
-        scanner = new Scanner(System.in);
         String shot = scanner.nextLine();
+
+        char x = shot.charAt(0);
+        char y = shot.charAt(1);
+
+        int[][] shotCoordinates = new int[10][10];
+
+        for (char c : alphabets) {
+            if (x == c) {
+                if (x == 'A') {
+                    System.out.println(grid[0][0]);
+                }
+            }
+        }
+
+        for (char ch : alphabets) {
+            if (ch == x) {
+                System.out.println(grid[0]);
+                System.out.println(ch);
+                DisplayGrid(grid, alphabets);
+            }
+        }
+
+
+
         // TODO: shooting grid
     }
 
