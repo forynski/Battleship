@@ -29,6 +29,8 @@ public class Main {
 
         System.out.println("Take a shot!");
         String shot = scanner.nextLine();
+        
+        // TODO: add a loop
 
         char x = shot.charAt(0);
         if (x == 'A') {
@@ -51,6 +53,8 @@ public class Main {
             x = 8;
         } else if (x == 'J') {
             x = 9;
+        } else {
+            System.out.println("Error! You entered the wrong coordinates! Try again:");
         }
 
         char y = shot.charAt(1);
@@ -78,6 +82,8 @@ public class Main {
 
         if (grid[x][y] == 'O') {
             System.out.println("You hit a ship!");
+            grid[x][y] = 'X';
+            DisplayGrid(grid, alphabets);
         } else {
             System.out.println("You missed!");
         }
