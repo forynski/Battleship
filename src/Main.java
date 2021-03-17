@@ -28,64 +28,69 @@ public class Main {
         DisplayGrid(grid, alphabets);
 
         System.out.println("Take a shot!");
-        String shot = scanner.nextLine();
 
-        // TODO: add a loop
+        while (scanner.hasNext()) {
+            String shot = scanner.nextLine();
 
-        char x = shot.charAt(0);
-        if (x == 'A') {
-            x = 0;
-        } else if (x == 'B') {
-            x = 1;
-        } else if (x == 'C') {
-            x = 2;
-        } else if (x == 'D') {
-            x = 3;
-        } else if (x == 'E') {
-            x = 4;
-        } else if (x == 'F') {
-            x = 5;
-        } else if (x == 'G') {
-            x = 6;
-        } else if (x == 'H') {
-            x = 7;
-        } else if (x == 'I') {
-            x = 8;
-        } else if (x == 'J') {
-            x = 9;
-        } else {
-            System.out.println("Error! You entered the wrong coordinates! Try again:");
-        }
+            // TODO: review the loop
 
-        char y = shot.charAt(1);
-        if (y == '1') {
-            y = 0;
-        } else if (y == '2') {
-            y = 1;
-        } else if (y == '3') {
-            y = 2;
-        } else if (y == '4') {
-            y = 3;
-        } else if (y == '5') {
-            y = 4;
-        } else if (y == '6') {
-            y = 5;
-        } else if (y == '7') {
-            y = 6;
-        } else if (y == '8') {
-            y = 7;
-        } else if (y == '9') {
-            y = 8;
-        } else {
-            y = 9;
-        }
+            char x = shot.charAt(0);
+            if (x == 'A') {
+                x = 0;
+            } else if (x == 'B') {
+                x = 1;
+            } else if (x == 'C') {
+                x = 2;
+            } else if (x == 'D') {
+                x = 3;
+            } else if (x == 'E') {
+                x = 4;
+            } else if (x == 'F') {
+                x = 5;
+            } else if (x == 'G') {
+                x = 6;
+            } else if (x == 'H') {
+                x = 7;
+            } else if (x == 'I') {
+                x = 8;
+            } else if (x == 'J') {
+                x = 9;
+            } else {
+                System.out.println("Error! You entered the wrong coordinates! Try again:");
+                continue;
+            }
 
-        if (grid[x][y] == 'O') {
-            System.out.println("You hit a ship!");
-            grid[x][y] = 'X';
-            DisplayGrid(grid, alphabets);
-        } else {
-            System.out.println("You missed!");
+            char y = shot.charAt(1);
+            if (y == '1') {
+                y = 0;
+            } else if (y == '2') {
+                y = 1;
+            } else if (y == '3') {
+                y = 2;
+            } else if (y == '4') {
+                y = 3;
+            } else if (y == '5') {
+                y = 4;
+            } else if (y == '6') {
+                y = 5;
+            } else if (y == '7') {
+                y = 6;
+            } else if (y == '8') {
+                y = 7;
+            } else if (y == '9') {
+                y = 8;
+            } else {
+                y = 9;
+            }
+
+
+            if (grid[x][y] == 'O') {
+                System.out.println("You hit a ship!");
+                grid[x][y] = 'X';
+                DisplayGrid(grid, alphabets);
+            } else {
+                System.out.println("You missed!");
+            }
         }
     }
 
