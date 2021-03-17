@@ -32,8 +32,6 @@ public class Main {
         while (scanner.hasNext()) {
             String shot = scanner.nextLine();
 
-            // TODO: review the loop
-
             char x = shot.charAt(0);
             if (x == 'A') {
                 x = 0;
@@ -58,7 +56,7 @@ public class Main {
             }
 
             char y = shot.charAt(1);
-            if (y == '1') {
+            if (y == '1' && shot.length() == 2) {
                 y = 0;
             } else if (y == '2') {
                 y = 1;
@@ -76,7 +74,8 @@ public class Main {
                 y = 7;
             } else if (y == '9') {
                 y = 8;
-            } else {
+//            } else if (y == '10') { // TODO: unable to assign '10' to char, try to use String
+            } else if (shot.charAt(1) == 1 && shot.charAt(2) == 0) {
                 y = 9;
             }
 
@@ -87,6 +86,8 @@ public class Main {
                     DisplayGrid(grid, alphabets);
                 } else {
                     System.out.println("You missed!");
+                    grid[x][y] = 'M';
+                    DisplayGrid(grid, alphabets);
                 }
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Error! You entered the wrong coordinates! Try again:");
