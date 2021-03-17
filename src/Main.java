@@ -57,7 +57,6 @@ public class Main {
                 x = 9;
             } else {
                 System.out.println("Error! You entered the wrong coordinates! Try again:");
-                continue;
             }
 
             char y = shot.charAt(1);
@@ -83,8 +82,10 @@ public class Main {
                 y = 9;
             }
 
-
-            if (grid[x][y] == 'O') {
+            String regex = "[k-zK-Z]";
+            if (shot.contains(regex)) {
+                break;
+            } else if (grid[x][y] == 'O') {
                 System.out.println("You hit a ship!");
                 grid[x][y] = 'X';
                 DisplayGrid(grid, alphabets);
