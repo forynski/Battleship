@@ -55,8 +55,6 @@ public class Main {
                 x = 8;
             } else if (x == 'J') {
                 x = 9;
-            } else {
-                System.out.println("Error! You entered the wrong coordinates! Try again:");
             }
 
             char y = shot.charAt(1);
@@ -82,16 +80,18 @@ public class Main {
                 y = 9;
             }
 
-            String regex = "[k-zK-Z]";
-            if (shot.contains(regex)) {
-                break;
-            } else if (grid[x][y] == 'O') {
-                System.out.println("You hit a ship!");
-                grid[x][y] = 'X';
-                DisplayGrid(grid, alphabets);
-            } else {
-                System.out.println("You missed!");
+            try {
+                if (grid[x][y] == 'O') {
+                    System.out.println("You hit a ship!");
+                    grid[x][y] = 'X';
+                    DisplayGrid(grid, alphabets);
+                } else {
+                    System.out.println("You missed!");
+                }
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Error! You entered the wrong coordinates! Try again:");
             }
+
         }
     }
 
