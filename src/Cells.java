@@ -1,7 +1,7 @@
 package battleship;
 
 public enum Cells {
-    EMPTY('~'),
+    FOG_OF_WAR('~'),
     SHIP('O'),
     HIT('X'),
     MISS('M');
