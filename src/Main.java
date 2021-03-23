@@ -2,7 +2,7 @@ package battleship;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main extends DisplayGridClass {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -16,17 +16,16 @@ public class Main {
             }
         }
 
-
-        DisplayGrid(grid, alphabets);
-        Check.CheckCoordinates(grid, alphabets, "Aircraft Carrier", 5);
-        Check.CheckCoordinates(grid, alphabets, "Battleship", 4);
-        Check.CheckCoordinates(grid, alphabets, "Submarine", 3);
-        Check.CheckCoordinates(grid, alphabets, "Cruiser", 3);
-        Check.CheckCoordinates(grid, alphabets, "Destroyer", 2);
-
+        displayGrid(grid, alphabets);
+        Check.checkCoordinates(grid, alphabets, "Aircraft Carrier", 5);
+        Check.checkCoordinates(grid, alphabets, "Battleship", 4);
+        Check.checkCoordinates(grid, alphabets, "Submarine", 3);
+        Check.checkCoordinates(grid, alphabets, "Cruiser", 3);
+        Check.checkCoordinates(grid, alphabets, "Destroyer", 2);
         System.out.println("The game starts!");
-        DisplayEmptyGrid(grid, alphabets);
-//        DisplayGrid(grid, alphabets);
+
+        hideCells(grid);
+        displayGrid(grid, alphabets);
 
         System.out.println("Take a shot!");
 
@@ -87,45 +86,21 @@ public class Main {
                     System.out.println("You missed!");
                     grid[x][y] = 'M';
                 }
-                DisplayGrid(grid, alphabets);
+                displayGrid(grid, alphabets);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Error! You entered the wrong coordinates! Try again:");
             }
-
         }
     }
 
-
-    public static void DisplayGrid(char[][] grid, char[] alphabets) {
-        System.out.print("  ");
-        for (int i = 1; i <= 10; i++) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
-        for (int i = 0; i < 10; i++) {
-            System.out.print(alphabets[i] + " ");
-            for (int j = 0; j < 10; j++) {
-                System.out.print(grid[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    public static void DisplayEmptyGrid(char[][] grid, char[] alphabets) {
-        System.out.print("  ");
-        for (int i = 1; i <= 10; i++) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
-        for (int i = 0; i < 10; i++) {
-            System.out.print(alphabets[i] + " ");
-            for (int j = 0; j < 10; j++) {
+    static void hideCells(char[][] grid) {
+        for (int i = 0; i < grid[0].length; i++) {
+            for (int j = 0; j < grid.length; j++) {
                 if (grid[i][j] == 'O') {
                     grid[i][j] = '~';
                 }
-                System.out.print(grid[i][j] + " ");
             }
-            System.out.println();
+
         }
     }
 }
