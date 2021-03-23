@@ -2,12 +2,12 @@ package battleship;
 
 import java.util.Scanner;
 
-import static battleship.Main.DisplayGrid;
+import static battleship.Main.displayGrid;
 
 public class Check {
     public static Scanner scanner = new Scanner(System.in);
 
-    public static void CheckCoordinates(char[][] grid, char[] alphabets, String shipName, int ship) {
+    public static void checkCoordinates(char[][] grid, char[] alphabets, String shipName, int ship) {
         String[] coordinates;
         System.out.println("Enter the coordinates of the " + shipName + " (" + ship + " cells):");
 
@@ -41,7 +41,7 @@ public class Check {
                                 grid[index][i] = 'O';
                             }
                         }
-                        DisplayGrid(grid, alphabets);
+                        displayGrid(grid, alphabets);
                         break;
                     } else {
                         System.out.println("Error! Wrong length of the " + shipName + "! Try again:");
@@ -56,7 +56,7 @@ public class Check {
                                 for (int i = index1; i <= index2; i++) {
                                     grid[i][startCoordinates - 1] = 'O';
                                 }
-                                DisplayGrid(grid, alphabets);
+                                displayGrid(grid, alphabets);
                                 break;
                             } else {
                                 System.out.println("Error! Wrong ship location! Try again:");
@@ -69,7 +69,7 @@ public class Check {
                             for (int i = index1; i <= index2; i++) {
                                 grid[i][startCoordinates - 1] = 'O';
                             }
-                            DisplayGrid(grid, alphabets);
+                            displayGrid(grid, alphabets);
                             break;
                         } else {
                             System.out.println("Error! Wrong ship location! Try again:");
@@ -80,4 +80,3 @@ public class Check {
         }
     }
 }
-
