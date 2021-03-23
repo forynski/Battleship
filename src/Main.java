@@ -16,6 +16,17 @@ public class Main extends DisplayGridClass {
             }
         }
 
+// TODO: check the duplicated array
+        char[][] gridFog = new char[10][10];
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                gridFog[i][j] = '~';
+            }
+        }
+        
+        
+        
+
         displayGrid(grid, alphabets);
         Check.checkCoordinates(grid, alphabets, "Aircraft Carrier", 5);
         Check.checkCoordinates(grid, alphabets, "Battleship", 4);
@@ -30,8 +41,8 @@ public class Main extends DisplayGridClass {
         System.out.println("Take a shot!");
 
         while (scanner.hasNext()) {
-            String shot = scanner.nextLine();
 
+            String shot = scanner.nextLine();
             char x = shot.charAt(0);
             if (x == 'A') {
                 x = 0;
@@ -79,6 +90,7 @@ public class Main extends DisplayGridClass {
             }
 
             try {
+//                if (grid[x][y] == Cells.FOG_OF_WAR.getSymbol()) {
                 if (grid[x][y] == 'O') {
                     System.out.println("You hit a ship!");
                     grid[x][y] = 'X';
@@ -97,10 +109,11 @@ public class Main extends DisplayGridClass {
         for (int i = 0; i < grid[0].length; i++) {
             for (int j = 0; j < grid.length; j++) {
                 if (grid[i][j] == 'O') {
-                    grid[i][j] = '~';
+                    grid[i][j] = Cells.FOG_OF_WAR.getSymbol();
+//                    grid[i][j] = '~';
                 }
             }
-
         }
     }
+    
 }
