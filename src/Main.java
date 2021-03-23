@@ -25,7 +25,8 @@ public class Main {
         Check.CheckCoordinates(grid, alphabets, "Destroyer", 2);
 
         System.out.println("The game starts!");
-        DisplayGrid(grid, alphabets);
+        DisplayEmptyGrid(grid, alphabets);
+//        DisplayGrid(grid, alphabets);
 
         System.out.println("Take a shot!");
 
@@ -104,6 +105,24 @@ public class Main {
         for (int i = 0; i < 10; i++) {
             System.out.print(alphabets[i] + " ");
             for (int j = 0; j < 10; j++) {
+                System.out.print(grid[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void DisplayEmptyGrid(char[][] grid, char[] alphabets) {
+        System.out.print("  ");
+        for (int i = 1; i <= 10; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        for (int i = 0; i < 10; i++) {
+            System.out.print(alphabets[i] + " ");
+            for (int j = 0; j < 10; j++) {
+                if (grid[i][j] == 'O') {
+                    grid[i][j] = '~';
+                }
                 System.out.print(grid[i][j] + " ");
             }
             System.out.println();
