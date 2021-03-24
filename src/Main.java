@@ -2,13 +2,13 @@ package battleship;
 
 import java.util.Scanner;
 
-public class Main extends DisplayGridClass {
+public class Main {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
 
         char[][] grid = new char[10][10];
-        char[] alphabets = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+        char[] alphabets = "ABCDEFGHIJ".toCharArray();
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -16,18 +16,9 @@ public class Main extends DisplayGridClass {
             }
         }
 
-// TODO: check the duplicated array
-        char[][] gridFog = new char[10][10];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                gridFog[i][j] = '~';
-            }
-        }
-        
-        
-        
 
-        displayGrid(grid, alphabets);
+
+        DisplayGridClass.displayGrid(grid, alphabets);
         Check.checkCoordinates(grid, alphabets, "Aircraft Carrier", 5);
         Check.checkCoordinates(grid, alphabets, "Battleship", 4);
         Check.checkCoordinates(grid, alphabets, "Submarine", 3);
@@ -35,9 +26,10 @@ public class Main extends DisplayGridClass {
         Check.checkCoordinates(grid, alphabets, "Destroyer", 2);
         System.out.println("The game starts!");
 
+        // TODO: check grid overriding (add method, String, contains, replace)
         hideCells(grid);
-        displayGrid(grid, alphabets);
-
+        DisplayGridClass.displayGrid(grid, alphabets);
+        
         System.out.println("Take a shot!");
 
         while (scanner.hasNext()) {
@@ -98,7 +90,7 @@ public class Main extends DisplayGridClass {
                     System.out.println("You missed!");
                     grid[x][y] = 'M';
                 }
-                displayGrid(grid, alphabets);
+                DisplayGridClass.displayGrid(grid, alphabets);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Error! You entered the wrong coordinates! Try again:");
             }
@@ -115,5 +107,5 @@ public class Main extends DisplayGridClass {
             }
         }
     }
-    
+
 }
