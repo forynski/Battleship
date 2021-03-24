@@ -2,6 +2,7 @@ package battleship;
 
 public class DisplayGridClass {
     public static void displayGrid(char[][] grid, char[] alphabets) {
+
         System.out.print("  ");
         for (int i = 1; i <= 10; i++) {
             System.out.print(i + " ");
@@ -16,4 +17,3 @@ public class DisplayGridClass {
         }
     }
 }
-
