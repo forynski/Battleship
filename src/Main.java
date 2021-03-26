@@ -3,9 +3,9 @@ package battleship;
 import java.util.Scanner;
 
 public class Main {
-    public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
         char[][] grid = new char[10][10];
         char[] alphabets = "ABCDEFGHIJ".toCharArray();
@@ -16,9 +16,7 @@ public class Main {
             }
         }
 
-
-
-        DisplayGridClass.displayGrid(grid, alphabets);
+        displayGrid(grid, alphabets);
         Check.checkCoordinates(grid, alphabets, "Aircraft Carrier", 5);
         Check.checkCoordinates(grid, alphabets, "Battleship", 4);
         Check.checkCoordinates(grid, alphabets, "Submarine", 3);
@@ -26,10 +24,10 @@ public class Main {
         Check.checkCoordinates(grid, alphabets, "Destroyer", 2);
         System.out.println("The game starts!");
 
-        // TODO: check grid overriding (add method, String, contains, replace)
+        // TODO: check grid overriding
         hideCells(grid);
-        DisplayGridClass.displayGrid(grid, alphabets);
-        
+        displayGrid(grid, alphabets);
+
         System.out.println("Take a shot!");
 
         while (scanner.hasNext()) {
@@ -90,10 +88,26 @@ public class Main {
                     System.out.println("You missed!");
                     grid[x][y] = 'M';
                 }
-                DisplayGridClass.displayGrid(grid, alphabets);
+                displayGrid(grid, alphabets);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Error! You entered the wrong coordinates! Try again:");
             }
+        }
+    }
+
+    static void displayGrid(char[][] grid, char[] alphabets) {
+
+        System.out.print("  ");
+        for (int i = 1; i <= 10; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        for (int i = 0; i < 10; i++) {
+            System.out.print(alphabets[i] + " ");
+            for (int j = 0; j < 10; j++) {
+                System.out.print(grid[i][j] + " ");
+            }
+            System.out.println();
         }
     }
 
@@ -107,5 +121,4 @@ public class Main {
             }
         }
     }
-
 }
