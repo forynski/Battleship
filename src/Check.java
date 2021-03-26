@@ -2,6 +2,8 @@ package battleship;
 
 import java.util.Scanner;
 
+import static battleship.Main.displayGrid;
+
 public class Check {
     public static Scanner scanner = new Scanner(System.in);
 
@@ -39,7 +41,7 @@ public class Check {
                                 grid[index][i] = 'O';
                             }
                         }
-                        DisplayGridClass.displayGrid(grid, alphabets);
+                        displayGrid(grid, alphabets);
                         break;
                     } else {
                         System.out.println("Error! Wrong length of the " + shipName + "! Try again:");
@@ -54,7 +56,7 @@ public class Check {
                                 for (int i = index1; i <= index2; i++) {
                                     grid[i][startCoordinates - 1] = 'O';
                                 }
-                                DisplayGridClass.displayGrid(grid, alphabets);
+                                displayGrid(grid, alphabets);
                                 break;
                             } else {
                                 System.out.println("Error! Wrong ship location! Try again:");
@@ -67,7 +69,7 @@ public class Check {
                             for (int i = index1; i <= index2; i++) {
                                 grid[i][startCoordinates - 1] = 'O';
                             }
-                            DisplayGridClass.displayGrid(grid, alphabets);
+                            displayGrid(grid, alphabets);
                             break;
                         } else {
                             System.out.println("Error! Wrong ship location! Try again:");
