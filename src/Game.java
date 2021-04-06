@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Game {
-    char[][] board = {{'~','~','~','~','~','~','~','~','~','~'},
+    char[][] grid = {{'~','~','~','~','~','~','~','~','~','~'},
             {'~','~','~','~','~','~','~','~','~','~'},
             {'~','~','~','~','~','~','~','~','~','~'},
             {'~','~','~','~','~','~','~','~','~','~'},
@@ -14,6 +14,14 @@ public class Game {
             {'~','~','~','~','~','~','~','~','~','~'},
             {'~','~','~','~','~','~','~','~','~','~'},
             {'~','~','~','~','~','~','~','~','~','~'},};
+
+//char[][] grid = new char[10][10];
+//char[] alphabets = "ABCDEFGHIJ".toCharArray();
+//for (int i = 0; i < 10; i++) {
+//        for (int j = 0; j < 10; j++) {
+//            grid[i][j] = '~';
+//        }
+//    }
 
     HashMap<Integer,Character> map1 = new HashMap<>();
     {
@@ -45,44 +53,44 @@ public class Game {
     }
 
 
-    void printBoard(){
+    void printGrid() {
         System.out.println("  1 2 3 4 5 6 7 8 9 10");
-        for(int i=0;i<this.board.length;i++){
+        for (int i = 0; i < this.grid.length; i++){
             System.out.print(map1.get(i));
-            for(int j=0;j<this.board[0].length;j++){
-                System.out.printf(String.valueOf(" "+board[i][j]));
+            for (int j = 0; j < this.grid[0].length; j++){
+                System.out.printf(String.valueOf(" "+ grid[i][j]));
             }
             System.out.println();
         }
     }
 
-    void printBoardWithFogOfWar(){
+    void printGridWithFogOfWar() {
         System.out.println("  1 2 3 4 5 6 7 8 9 10");
-        for(int i=0;i<this.board.length;i++){
+        for (int i = 0; i < this.grid.length; i++){
             System.out.print(map1.get(i));
-            for(int j=0;j<this.board[0].length;j++){
-                if(board[i][j]=='O'){
+            for (int j = 0; j < this.grid[0].length; j++){
+                if (grid[i][j] == 'O'){
                     System.out.printf(String.valueOf(" ~"));
-                }else {
-                    System.out.printf(String.valueOf(" "+board[i][j]));
+                } else {
+                    System.out.printf(String.valueOf(" " + grid[i][j]));
                 }
             }
             System.out.println();
         }
     }
 
-    void TakePosition(int length,String type){
+    void TakePosition(int length,String type) {
         Scanner scanner = new Scanner(System.in);
         boolean flag1;
         boolean flag2;
         int[][] position = new int[2][2];
-        do{
+        do {
 
             flag2 = false;
             String start ;
             String end ;
 
-            do{
+            do {
                 flag1 = false;
                 start = scanner.next();
                 end = scanner.next();
@@ -91,63 +99,63 @@ public class Game {
                 position[1][0] = map2.get(end.charAt(0));
                 position[1][1] = Integer.parseInt(end.substring(1)) - 1;
 
-                if(position[0][0]!=position[1][0]&&position[0][1]!=position[1][1]){
+                if (position[0][0] != position[1][0] && position[0][1] != position[1][1]) {
                     System.out.println("Error! Wrong ship location! Try again:");
                     flag1 = true;
                     scanner.nextLine();
-                }else if(Math.max(position[0][1],position[1][1])-Math.min(position[0][1],position[1][1])+1!=length&&Math.max(position[0][0],position[1][0])-Math.min(position[0][0],position[1][0])+1!=length){
+                } else if (Math.max(position[0][1], position[1][1]) - Math.min(position[0][1], position[1][1]) + 1 !=length&&Math.max(position[0][0], position[1][0]) - Math.min(position[0][0], position[1][0]) + 1 != length) {
                     System.out.println("Error! Wrong length of the "+type+"! Try again:");
                     flag1 = true;
                     scanner.nextLine();
                 }
 
-            }while (flag1);
+            } while (flag1);
 
-            if(position[0][0]==position[1][0]){
-                for(int i=Math.min(position[0][1],position[1][1]);i<Math.max(position[0][1],position[1][1])+1;i++){
+            if (position[0][0] == position[1][0]) {
+                for (int i = Math.min(position[0][1], position[1][1]); i < Math.max(position[0][1], position[1][1]) + 1; i++) {
                     try {
-                        if(board[position[0][0]-1][i]=='O'||board[position[0][0]+1][i]=='O'||board[position[0][0]][i+1]=='O'||board[position[0][0]][i-1]=='O'){
+                        if (grid[position[0][0] - 1][i]== 'O' || grid[position[0][0] + 1][i]== 'O' || grid[position[0][0]][i + 1] == 'O' || grid[position[0][0]][i - 1]== 'O') {
                             System.out.println("Error! You placed it too close to another one. Try again:");
                             flag2 = true;
                             scanner.nextLine();
                         }
-                    }catch (ArrayIndexOutOfBoundsException e){
+                    } catch (ArrayIndexOutOfBoundsException e) {
 
                     }
                 }
             }
-            if(position[0][1]==position[1][1]){
-                for(int i=Math.min(position[0][0],position[1][0]);i<Math.max(position[0][0],position[1][0])+1;i++){
+            if (position[0][1] == position[1][1]) {
+                for (int i = Math.min(position[0][0],position[1][0]); i < Math.max(position[0][0], position[1][0]) + 1; i++) {
                     try {
-                        if(board[i-1][position[0][1]]=='O'||board[i+1][position[0][1]]=='O'||board[i][position[0][1]+1]=='O'||board[i][position[0][1]-1]=='O'){
+                        if (grid[i - 1][position[0][1]] == 'O'|| grid[i + 1][position[0][1]]== 'O' || grid[i][position[0][1] + 1] == 'O' || grid[i][position[0][1] - 1] == 'O') {
                             System.out.println("Error! You placed it too close to another one. Try again:");
                             flag2 = true;
                             scanner.nextLine();
                         }
-                    }catch (ArrayIndexOutOfBoundsException e){
+                    } catch (ArrayIndexOutOfBoundsException e) {
 
                     }
                 }
             }
 
-        }while (flag2);
+        } while (flag2);
 
-        if(position[0][0]==position[1][0]){
-            for(int i=Math.min(position[0][1],position[1][1]);i<Math.max(position[0][1],position[1][1])+1;i++){
-                board[position[0][0]][i] = 'O';
+        if (position[0][0] == position[1][0]) {
+            for (int i = Math.min(position[0][1], position[1][1]); i < Math.max(position[0][1], position[1][1]) + 1; i++) {
+                grid[position[0][0]][i] = 'O';
             }
         }
-        if(position[0][1]==position[1][1]){
-            for(int i=Math.min(position[0][0],position[1][0]);i<Math.max(position[0][0],position[1][0])+1;i++){
-                board[i][position[0][1]] = 'O';
+        if (position[0][1] == position[1][1]) {
+            for (int i = Math.min(position[0][0], position[1][0]); i < Math.max(position[0][0],position[1][0]) + 1; i++) {
+                grid[i][position[0][1]] = 'O';
             }
         }
 
-        printBoard();
+        printGrid();
 
     }
 
-    void initBoard(){
+    void initBoard() {
         System.out.println("Enter the coordinates of the Aircraft Carrier (5 cells):");
         TakePosition(5,"Aircraft Carrier");
         System.out.println("Enter the coordinates of the Battleship (4 cells):");
@@ -160,33 +168,32 @@ public class Game {
         TakePosition(2,"Destroyer");
     }
 
-    void start(){
+    void start() {
         System.out.println("The game starts!");
-        printBoardWithFogOfWar();
+        printGridWithFogOfWar();
         System.out.println("Take a shot!");
         Scanner scanner = new Scanner(System.in);
         boolean flag ;
         String target;
-        do{
+        do {
             flag = false;
             target = scanner.next();
-            if(!map2.containsKey(target.charAt(0))||(Integer.parseInt(target.substring(1)) - 1< 0||Integer.parseInt(target.substring(1)) - 1> 9)){
+            if (!map2.containsKey(target.charAt(0))||(Integer.parseInt(target.substring(1)) - 1 < 0 || Integer.parseInt(target.substring(1)) - 1 > 9)) {
                 System.out.println("Error! You entered the wrong coordinates! Try again:");
                 flag = true;
             }
-        }while (flag);
+        } while (flag);
         int[] Target = {map2.get(target.charAt(0)), Integer.parseInt(target.substring(1)) - 1};
-        if(board[Target[0]][Target[1]]=='O'){
-            board[Target[0]][Target[1]] = 'X';
-            printBoardWithFogOfWar();
+        if (grid[Target[0]][Target[1]] == 'O') {
+            grid[Target[0]][Target[1]] = 'X';
+            printGridWithFogOfWar();
             System.out.println("You hit a ship!");
-            printBoard();
-        }else if(board[Target[0]][Target[1]]=='~'){
-            board[Target[0]][Target[1]] = 'M';
-            printBoardWithFogOfWar();
+            printGrid();
+        } else if (grid[Target[0]][Target[1]] == '~'){
+            grid[Target[0]][Target[1]] = 'M';
+            printGridWithFogOfWar();
             System.out.println("You missed!");
-            printBoard();
+            printGrid();
         }
     }
-
 }
